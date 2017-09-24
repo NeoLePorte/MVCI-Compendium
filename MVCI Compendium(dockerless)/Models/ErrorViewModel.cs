@@ -1,6 +1,6 @@
 using System;
 
-namespace MVCI_Compendium_dockerless_.Models
+namespace MVCI_Compendium.Models
 {
     public class ErrorViewModel
     {

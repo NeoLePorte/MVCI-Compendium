@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MVCI_Compendium_dockerless_.Data;
-using MVCI_Compendium_dockerless_.Models;
-using MVCI_Compendium_dockerless_.Services;
+using MVCI_Compendium.Data;
+using MVCI_Compendium.Models;
+using MVCI_Compendium.Services;
 
-namespace MVCI_Compendium_dockerless_
+namespace MVCI_Compendium
 {
     public class Startup
     {

@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using MVCI_Compendium_dockerless_.Models;
-using MVCI_Compendium_dockerless_.Models.AccountViewModels;
-using MVCI_Compendium_dockerless_.Services;
+using MVCI_Compendium.Models;
+using MVCI_Compendium.Models.AccountViewModels;
+using MVCI_Compendium.Services;
 
-namespace MVCI_Compendium_dockerless_.Controllers
+namespace MVCI_Compendium.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]

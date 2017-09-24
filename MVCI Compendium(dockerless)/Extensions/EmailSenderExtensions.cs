@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using MVCI_Compendium_dockerless_.Services;
+using MVCI_Compendium.Services;
 
-namespace MVCI_Compendium_dockerless_.Services
+namespace MVCI_Compendium.Services
 {
     public static class EmailSenderExtensions
     {

@@ -1,4 +1,4 @@
-﻿@using MVCI_Compendium_dockerless_.Views.Manage
+﻿@using MVCI_Compendium.Views.Manage
 @inject SignInManager<ApplicationUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();

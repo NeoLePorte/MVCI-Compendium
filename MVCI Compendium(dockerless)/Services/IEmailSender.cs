@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MVCI_Compendium_dockerless_.Services
+namespace MVCI_Compendium.Services
 {
     public interface IEmailSender
     {

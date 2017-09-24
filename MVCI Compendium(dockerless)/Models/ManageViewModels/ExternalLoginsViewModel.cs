@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace MVCI_Compendium_dockerless_.Models.ManageViewModels
+namespace MVCI_Compendium.Models.ManageViewModels
 {
     public class ExternalLoginsViewModel
     {

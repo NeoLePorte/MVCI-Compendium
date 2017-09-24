@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MVCI_Compendium_dockerless_.Models;
+using MVCI_Compendium.Models;
 
-namespace MVCI_Compendium_dockerless_.Data
+namespace MVCI_Compendium.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

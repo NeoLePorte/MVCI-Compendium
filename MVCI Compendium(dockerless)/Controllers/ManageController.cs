@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using MVCI_Compendium_dockerless_.Models;
-using MVCI_Compendium_dockerless_.Models.ManageViewModels;
-using MVCI_Compendium_dockerless_.Services;
+using MVCI_Compendium.Models;
+using MVCI_Compendium.Models.ManageViewModels;
+using MVCI_Compendium.Services;
 
-namespace MVCI_Compendium_dockerless_.Controllers
+namespace MVCI_Compendium.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
@@ -495,7 +495,7 @@ namespace MVCI_Compendium_dockerless_.Controllers
         {
             return string.Format(
                 AuthenicatorUriFormat,
-                _urlEncoder.Encode("MVCI_Compendium_dockerless_"),
+                _urlEncoder.Encode("MVCI_Compendium"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

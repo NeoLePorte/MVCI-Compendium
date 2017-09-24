@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCI Compendium(dockerless)", "MVCI Compendium(dockerless)\MVCI Compendium(dockerless).csproj", "{853651C7-8B5C-4FEB-9F39-7BCDA18AF1BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCI Compendium", "MVCI Compendium(dockerless)\MVCI Compendium.csproj", "{853651C7-8B5C-4FEB-9F39-7BCDA18AF1BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

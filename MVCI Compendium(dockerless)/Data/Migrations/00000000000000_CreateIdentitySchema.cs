@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace MVCI_Compendium_dockerless_.Data.Migrations
+namespace MVCI_Compendium.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

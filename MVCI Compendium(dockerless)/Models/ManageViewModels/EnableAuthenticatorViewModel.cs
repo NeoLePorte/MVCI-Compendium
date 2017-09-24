@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MVCI_Compendium_dockerless_.Models.ManageViewModels
+namespace MVCI_Compendium.Models.ManageViewModels
 {
     public class EnableAuthenticatorViewModel
     {

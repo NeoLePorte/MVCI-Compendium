@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "MVCI_Compendium_dockerless_": {
+    "MVCI_Compendium": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

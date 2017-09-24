@@ -1,18 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MVCI_Compendium_dockerless_.Models;
+using MVCI_Compendium.Models;
+using MVCI_Compendium.Data;
 
-namespace MVCI_Compendium_dockerless_.Controllers
+namespace MVCI_Compendium.Controllers
 {
     public class HomeController : Controller
     {
+
+        private CharacterRepository _characterRepository = null;
+
+        public HomeController()
+        {
+            _characterRepository = new CharacterRepository();
+        }
         public IActionResult Index()
         {
-            return View();
+            var characters = _characterRepository.GetCharacter();
+
+            return View(characters);
+        }
+
+        public IActionResult Detail(string id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            var character = _characterRepository.GetCharacter((string)id);
+
+            return View(model: character);
+        }
+
+        private IActionResult HttpNotFound()
+        {
+            throw new NotImplementedException();
         }
 
         public IActionResult About()

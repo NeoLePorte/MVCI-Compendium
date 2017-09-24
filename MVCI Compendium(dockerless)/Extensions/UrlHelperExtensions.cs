@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MVCI_Compendium_dockerless_.Controllers;
+using MVCI_Compendium.Controllers;
 
 namespace Microsoft.AspNetCore.Mvc
 {

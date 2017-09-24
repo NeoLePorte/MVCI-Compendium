@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-namespace MVCI_Compendium_dockerless_.Views.Manage
+namespace MVCI_Compendium.Views.Manage
 {
     public static class ManageNavPages
     {
