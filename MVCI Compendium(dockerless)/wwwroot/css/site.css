@@ -1,6 +1,41 @@
-﻿body {
+﻿
+
+body {
+    margin: 0;
     padding-top: 50px;
     padding-bottom: 20px;
+    background: black;
+}
+
+.faction-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 4em;
+    margin-bottom: 2em;
+}
+
+.characters {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.marvel-characters {
+    display: none;
+    background-color: rgba(255,0,0,0.5);
+}
+
+.capcom-characters {
+    background-color: rgba(0,34,255,0.5);
+}
+
+#marvel-btn, #capcom-btn {
+    width: 116.2px;
+    height: 38px;
+    border-radius: 19px;
 }
 
 /* Wrapping element */
@@ -8,28 +43,11 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    background: url(/images/Omega-Sigma-Background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
-}
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
-}
-
-/* QR code generator */
-#qrCode {
-    margin: 15px;
-}
-
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
-}

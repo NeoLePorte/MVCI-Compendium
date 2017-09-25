@@ -10,6 +10,7 @@
         public MoveList[] MoveList { get; set; }
         public Video[] Videos { get; set; }
         public string Notes  { get; set; }
+        public string Faction { get; set; }
 
         public string Icon => Name.Replace(" ", "-")
                      .ToLower() + ".png";
