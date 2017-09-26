@@ -5,38 +5,47 @@
 }
 
 
-    <div class="faction-btn">
-        <button id="capcom-btn">Capcom</button>
-        <button id="marvel-btn">Marvel</button>
-    </div>
+    
 
     <div class="characters">
-    <div class="row">
+    <div class="row row-border">
+        <div class="faction-btn">
+            <button id="capcom-btn">Capcom</button>
+            <button id="marvel-btn">Marvel</button>
+        </div>
             @foreach (var character in Model)
             {
                 @if (character.Faction == "capcom")
                 {
                     <div class="col-xs-4 capcom-characters">
-                        <h6>
+                        <div class="charTitle">
                             @character.Name
-                        </h6>
+                        </div>
                         <a href="@Url.Action("Detail", new { id = character.Id })">
-                            <img src="/images/@character.Icon"
-                                 class="img-responsive img-thumbnail icon" />
+                            <div class="center-block">
+                                <img src="/images/@character.Icon"
+                                     class="img-responsive img-thumbnail icon" />
+                            </div>
                         </a>
+
                     </div>
                 }
                 else
                 {
-                        <div class="col-xs-4 marvel-characters">
-                            <h6>
+                    <div class="col-xs-4 marvel-characters">
+                        <div class="icon-text-align">
+                            <p class="charTitle">
                                 @character.Name
-                            </h6>
+                            </p>
                             <a href="@Url.Action("Detail", new { id = character.Id })">
-                                <img src="/images/@character.Icon"
-                                     class="img-responsive img-thumbnail icon" />
+                                <div class="center-block">
+                                    <img src="/images/@character.Icon"
+                                         class="img-responsive img-thumbnail icon" />
+
+                                </div>
                             </a>
                         </div>
+                    </div>
                 }
             }
     </div>

@@ -5,6 +5,15 @@
     <UserSecretsId>aspnet-MVCI_Compendium_dockerless_-DB4B512E-922A-4E49-9438-10881C2F79E5</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Include="..\MVCI Compendium%2528dockerless%2529\wwwroot\css\fonts\american_captain-webfont.ttf" />
+    <Content Include="..\MVCI Compendium%2528dockerless%2529\wwwroot\css\fonts\american_captain-webfont.woff" />
+    <Content Include="..\MVCI Compendium%2528dockerless%2529\wwwroot\css\fonts\american_captain-webfont.woff2" />
+    <Content Include="..\MVCI Compendium%2528dockerless%2529\wwwroot\css\fonts\Korinna Bold.ttf" />
+    <Content Include="..\MVCI Compendium%2528dockerless%2529\wwwroot\css\fonts\korinna_bold-webfont.woff" />
+    <Content Include="..\MVCI Compendium%2528dockerless%2529\wwwroot\css\fonts\korinna_bold-webfont.woff2" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
@@ -16,6 +25,10 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\fonts\" />
   </ItemGroup>
 
 </Project>
