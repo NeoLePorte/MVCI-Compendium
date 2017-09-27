@@ -12,6 +12,7 @@ namespace MVCI_Compendium.Data
      //---------------------------------------------------------------------------------------------------------------------------------
     new Character()
     {
+        Order = 1,
         Id = "Strider",
         Name = "Strider",
         Stamina = "700",
@@ -24,11 +25,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "capcom"
     },
     new Character()
     {
+        Order = 2,
         Id = "Arthur",
         Name = "Arthur",
         Stamina = "700",
@@ -41,11 +59,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "capcom"
     },
     new Character()
     {
+        Order = 3,
         Id = "Frank West",
         Name = "Frank West",
         Stamina = "700",
@@ -58,11 +93,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "capcom"
     },
     new Character()
     {
+        Order = 4,
         Id = "Chris Redfield",
         Name = "Chris Redfield",
         Stamina = "700",
@@ -75,11 +127,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "capcom"
     },
     new Character()
     {
+        Order = 5,
         Id = "Mega man X",
         Name = "Mega man X",
         Stamina = "700",
@@ -92,11 +161,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "capcom"
     },
     new Character()
     {
+        Order = 6,
         Id = "Zero",
         Name = "Zero",
         Stamina = "700",
@@ -109,11 +195,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "capcom"
     },
     new Character()
     {
+        Order = 7,
         Id = "Nemesis",
         Name = "Nemesis",
         Stamina = "700",
@@ -126,11 +229,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "capcom"
     },
     new Character()
     {
+        Order = 8,
         Id = "Dante",
         Name = "Dante",
         Stamina = "700",
@@ -143,11 +263,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "capcom"
     },
     new Character()
     {
+        Order = 9,
         Id = "Ryu",
         Name = "Ryu",
         Stamina = "700",
@@ -161,10 +298,27 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
         Notes = "",
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Faction = "capcom"
     },
     new Character()
     {
+        Order = 10,
         Id = "Spencer",
         Name = "Spencer",
         Stamina = "700",
@@ -177,11 +331,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "capcom"
     },
     new Character()
     {
+        Order = 11,
         Id = "Chun-Li",
         Name = "Chun-Li",
         Stamina = "700",
@@ -194,11 +365,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "capcom"
     },
     new Character()
     {
+        Order = 12,
         Id = "Morrigan",
         Name = "Morrigan",
         Stamina = "700",
@@ -211,12 +399,29 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "capcom"
 
     },
     new Character()
     {
+        Order = 13,
         Id = "Firebrand",
         Name = "Firebrand",
         Stamina = "700",
@@ -229,12 +434,29 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "capcom"
 
     },
      new Character()
     {
+        Order = 14,
         Id = "Jedah",
         Name = "Jedah",
         Stamina = "700",
@@ -247,12 +469,29 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "capcom"
 
     },
      new Character()
     {
+        Order = 15,
         Id = "Haggar",
         Name = "Haggar",
         Stamina = "700",
@@ -265,6 +504,22 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "capcom"
     },
@@ -274,6 +529,7 @@ namespace MVCI_Compendium.Data
      //---------------------------------------------------------------------------------------------------------------------------------
      new Character()
     {
+        Order = 16,
         Id = "Rocket Raccoon",
         Name = "Rocket Raccoon",
         Stamina = "700",
@@ -286,11 +542,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "marvel"
     },
     new Character()
     {
+        Order = 17,
         Id = "Dr Strange",
         Name = "Dr Strange",
         Stamina = "700",
@@ -303,11 +576,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "marvel"
     },
     new Character()
     {
+        Order = 18,
         Id = "Hawkeye",
         Name = "Hawkeye",
         Stamina = "700",
@@ -320,11 +610,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "marvel"
     },
     new Character()
     {
+        Order = 19,
         Id = "Ultron",
         Name = "Ultron",
         Stamina = "700",
@@ -337,11 +644,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "marvel"
     },
     new Character()
     {
+        Order = 20,
         Id = "Gamora",
         Name = "Gamora",
         Stamina = "700",
@@ -354,11 +678,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "marvel"
     },
     new Character()
     {
+        Order = 21,
         Id = "Spider Man",
         Name = "Spider Man",
         Stamina = "700",
@@ -371,11 +712,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "marvel"
     },
     new Character()
     {
+        Order = 22,
         Id = "Iron Man",
         Name = "Iron Man",
         Stamina = "700",
@@ -388,11 +746,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "marvel"
     },
     new Character()
     {
+        Order = 23,
         Id = "Thanos",
         Name = "Thanos",
         Stamina = "700",
@@ -405,11 +780,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "marvel"
     },
     new Character()
     {
+        Order = 24,
         Id = "Nova",
         Name = "Nova",
         Stamina = "700",
@@ -422,11 +814,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "marvel"
     },
     new Character()
     {
+        Order = 25,
         Id = "Hulk",
         Name = "Hulk",
         Stamina = "700",
@@ -439,11 +848,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "marvel"
     },
     new Character()
     {
+        Order = 26,
         Id = "Captain Marvel",
         Name = "Captain Marvel",
         Stamina = "700",
@@ -456,11 +882,28 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "marvel"
     },
     new Character()
     {
+        Order = 27,
         Id = "Thor",
         Name = "Thor",
         Stamina = "700",
@@ -473,12 +916,29 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "marvel"
 
     },
     new Character()
     {
+        Order = 28,
         Id = "Captain America",
         Name = "Captain America",
         Stamina = "700",
@@ -491,12 +951,29 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "marvel"
 
     },
      new Character()
     {
+        Order = 29,
         Id = "Dormammu",
         Name = "Dormammu",
         Stamina = "700",
@@ -509,12 +986,29 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
         },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
+        },
         Notes = "",
         Faction = "marvel"
 
     },
      new Character()
     {
+        Order = 30,
         Id = "Ghost Rider",
         Name = "Ghost Rider",
         Stamina = "700",
@@ -526,6 +1020,22 @@ namespace MVCI_Compendium.Data
             new Combo() { Id = "3", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "4", Difficulty = "medium", Inputs = "" },
             new Combo() { Id = "5", Difficulty = "hard", Inputs = "" },
+        },
+        MoveList = new MoveList[]
+        {
+            new MoveList() { Id = "1", Name = "", Inputs = "" },
+            new MoveList() { Id = "2", Name = "", Inputs = "" },
+            new MoveList() { Id = "3", Name = "", Inputs = "" },
+            new MoveList() { Id = "4", Name = "", Inputs = "" },
+            new MoveList() { Id = "5", Name = "", Inputs = "" },
+        },
+        Videos = new Video[]
+        {
+            new Video() { Id = "1", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "2", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "3", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
+            new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
         },
         Notes = "",
         Faction = "marvel"
