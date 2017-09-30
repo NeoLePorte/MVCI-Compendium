@@ -1,0 +1,19 @@
+{
+  "name": "mvci_compendium",
+  "version": "0.0.1",
+  "description": "Marvel vs Capcom Infinite resource in Web App form",
+  "main": "site.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NeoLePorte/MVCI-Compendium.git"
+  },
+  "author": "Anthony Blanton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NeoLePorte/MVCI-Compendium/issues"
+  },
+  "homepage": "https://github.com/NeoLePorte/MVCI-Compendium#readme"
+}

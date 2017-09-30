@@ -22,6 +22,8 @@ namespace MVCI_Compendium.Controllers
             return View(characters);
         }
 
+
+
         public IActionResult Detail(string id)
         {
             if (id == null)
@@ -33,10 +35,21 @@ namespace MVCI_Compendium.Controllers
             return View(model: character);
         }
 
+
+
         private IActionResult HttpNotFound()
         {
             throw new NotImplementedException();
         }
+
+
+
+
+
+
+
+
+
 
         public IActionResult About()
         {

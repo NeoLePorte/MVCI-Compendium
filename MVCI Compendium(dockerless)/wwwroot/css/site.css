@@ -18,6 +18,14 @@ body {
     background: black;
 }
 
+.detail-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
 .faction-btn {
     display: flex;
     flex-direction: row;
