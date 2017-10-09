@@ -33,19 +33,16 @@
                 else
                 {
                     <div class="col-xs-4 marvel-characters">
-                        <div class="icon-text-align">
-                            <p class="charTitle">
-                                @character.Name
-                            </p>
+                        <div class="charTitle">
+                            @character.Name
                         </div>
-                            <a href="@Url.Action("Detail", new { id = character.Id })">
-                                <div class="center-block">
-                                    <img src="/images/@character.Icon"
-                                         class="img-responsive img-thumbnail icon" />
+                        <a href="@Url.Action("Detail", new { id = character.Id })">
+                            <div class="center-block">
+                                <img src="/images/@character.Icon"
+                                     class="img-responsive img-thumbnail icon" />
+                            </div>
+                        </a>
 
-                                </div>
-                            </a>
-                        
                     </div>
                 }
             }

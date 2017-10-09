@@ -27,11 +27,23 @@ namespace MVCI_Compendium.Data
         },
         MoveList = new MoveList[]
         {
-            new MoveList() { Id = "1", Name = "", Inputs = "" },
-            new MoveList() { Id = "2", Name = "", Inputs = "" },
-            new MoveList() { Id = "3", Name = "", Inputs = "" },
-            new MoveList() { Id = "4", Name = "", Inputs = "" },
-            new MoveList() { Id = "5", Name = "", Inputs = "" },
+            new MoveList() { Id = "1", Type="Special Moves", Name = "Ame-no-Murakumo", Inputs = "" },
+            new MoveList() { Id = "2", Type="Special Moves", Name = "Excalibur", Inputs = "" },
+            new MoveList() { Id = "3", Type="Special Moves", Name = "Formation B", Inputs = "" },
+            new MoveList() { Id = "4", Type="Special Moves", Name = "Formation C", Inputs = "" },
+            new MoveList() { Id = "5", Type="Special Moves", Name = "Gram", Inputs = "" },
+            new MoveList() { Id = "5", Type="Special Moves", Name = "Vajra", Inputs = "" },
+            new MoveList() { Id = "5", Type="Special Moves", Name = "Wall Cling", Inputs = "" },
+            new MoveList() { Id = "4", Type="Hyper Combo", Name = "Brionac", Inputs = "" },
+            new MoveList() { Id = "5", Type="Hyper Combo", Name = "Legion", Inputs = "" },
+            new MoveList() { Id = "5", Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = "" },
+            new MoveList() { Id = "5", Type="Hyper Combo", Name = "Ouroboros", Inputs = "" },
+            new MoveList() { Id = "5", Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = "" },
+            new MoveList() { Id = "5", Type="Command Normals", Name = "Arch Cut", Inputs = "" },
+            new MoveList() { Id = "4", Type="Command Normals", Name = "Formation A1", Inputs = "" },
+            new MoveList() { Id = "5", Type="Command Normals", Name = "Formation A2", Inputs = "" },
+            new MoveList() { Id = "5", Type="Command Normals", Name = "Lateral Slice", Inputs = "" },
+            new MoveList() { Id = "5", Type="Command Normals", Name = "Slide", Inputs = "" },
         },
         Videos = new Video[]
         {
@@ -41,7 +53,7 @@ namespace MVCI_Compendium.Data
             new Video() { Id = "4", Title = "", Thumbnail = "", Details = "" },
             new Video() { Id = "5", Title = "", Thumbnail = "", Details = "" },
         },
-        Notes = "",
+        Notes = "stuff",
         Faction = "capcom"
     },
     new Character()

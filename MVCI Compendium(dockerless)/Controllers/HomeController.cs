@@ -1,9 +1,9 @@
-﻿using System;
+﻿using System.Net;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MVCI_Compendium.Models;
 using MVCI_Compendium.Data;
-
+using System.Linq;
 namespace MVCI_Compendium.Controllers
 {
     public class HomeController : Controller
@@ -15,9 +15,10 @@ namespace MVCI_Compendium.Controllers
         {
             _characterRepository = new CharacterRepository();
         }
-        public IActionResult Index()
+
+        public  IActionResult Index()
         {
-            var characters = _characterRepository.GetCharacter();
+            var characters =  _characterRepository.GetCharacter();
 
             return View(characters);
         }
@@ -28,42 +29,46 @@ namespace MVCI_Compendium.Controllers
         {
             if (id == null)
             {
-                return HttpNotFound();
+                return new NotFoundObjectResult(HttpStatusCode.BadRequest);
             }
             var character = _characterRepository.GetCharacter((string)id);
+
 
             return View(model: character);
         }
 
-
-
-        private IActionResult HttpNotFound()
+        [HttpPost]
+        public IActionResult Detail(string id, string notes)
         {
-            throw new NotImplementedException();
+            var character = _characterRepository.GetCharacter((string)id);
+
+            character.Notes = notes;
+
+            return RedirectToAction("Detail");
         }
 
 
-
-
-
-
-
-
-
-
-        public IActionResult About()
+        public IActionResult Edit(string id)
         {
-            ViewData["Message"] = "Your application description page.";
+            if (id == null)
+            {
+                return new NotFoundObjectResult(HttpStatusCode.BadRequest);
+            }
 
             return View();
         }
 
-        public IActionResult Contact()
+
+        public IActionResult Delete(string id)
         {
-            ViewData["Message"] = "Your contact page.";
+            if (id == null)
+            {
+                return new NotFoundObjectResult(HttpStatusCode.BadRequest);
+            }
 
             return View();
         }
+
 
         public IActionResult Error()
         {
