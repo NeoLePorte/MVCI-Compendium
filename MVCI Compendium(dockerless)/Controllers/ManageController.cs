@@ -40,6 +40,7 @@ namespace MVCI_Compendium.Controllers
             _emailSender = emailSender;
             _logger = logger;
             _urlEncoder = urlEncoder;
+            
         }
 
         [TempData]

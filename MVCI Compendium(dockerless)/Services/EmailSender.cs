@@ -11,6 +11,7 @@ namespace MVCI_Compendium.Services
     {
         public Task SendEmailAsync(string email, string subject, string message)
         {
+
             return Task.CompletedTask;
         }
     }

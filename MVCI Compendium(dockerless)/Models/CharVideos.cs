@@ -1,6 +1,6 @@
 ﻿namespace MVCI_Compendium.Models
 {
-    public class Video
+    public class CharVideos
     {
         public string Id { get; set; }
         public string Link { get; set; }

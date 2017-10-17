@@ -31,6 +31,7 @@ namespace MVCI_Compendium
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<CharacterRepository, CharacterRepository>();
 
             services.AddMvc();
         }
@@ -53,12 +54,7 @@ namespace MVCI_Compendium
 
             app.UseAuthentication();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvc();
         }
     }
 }

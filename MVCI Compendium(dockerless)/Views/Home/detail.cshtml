@@ -1,10 +1,11 @@
 ﻿
-@model MVCI_Compendium.Models.Character
+@model MVCI_Compendium.Models.CharacterViewModel
 
 @{
     ViewData["Title"] = "Detail";
     var isEditMode = Model.Id != null;
     ViewBag.Title = isEditMode ? "Edit Note" : "Add Note";
+
 }
 
 <h1>@Model.Name</h1>
@@ -27,10 +28,17 @@
                 </div>
                 <div class="modal-body">
                     <div>
-                        <ul>
-                            @foreach (var moves in Model.MoveList)
+                        <ul class="list-group">
+                            @foreach (var move in Model.MoveList)
                             {
-                                <li>@moves.Name: @Html.Raw(moves.Inputs)</li>
+                                <text>@move.Name</text>
+                                <li class="list-group-item">
+                                    @foreach (var input in move.Inputs)
+                                {
+                                    <img src="~/images/@input.GetIcon()"
+                                         class="icon inputIcon"/>
+                                }
+                            </li>
                             }
                         </ul>
                     </div>
@@ -81,12 +89,18 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <ul class="list-group">
+                        @foreach (var combos in Model.Combos)
+                        {
+                            <text>@combos.Type | @combos.Difficulty</text>
+                            <li class="list-group-item">@Html.Raw(combos.Inputs)</li>
+                        }
+                    </ul>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Add</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
@@ -107,7 +121,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form asp-controller="Home" asp-action="Detail" method="post">
+                    <form asp-controller="Home" asp-action="Save" method="post">
                         <div class="form-group">
                             <textarea asp-for="Notes" class="form-control">@Model.Notes</textarea>
                         </div>

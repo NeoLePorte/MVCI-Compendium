@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 namespace MVCI_Compendium.Models
 {
-    public class Character
+    public class CharacterViewModel
     {
-        public int Order {get; set;}
+        public int Order { get; set; }
         public string Id { get; set; }
         public string Name { get; set; }
         public string Stamina { get; set; }
@@ -11,10 +11,9 @@ namespace MVCI_Compendium.Models
         public List<Combo> Combos { get; set; }
         public List<MoveModel> MoveList { get; set; }
         public List<CharVideos> Videos { get; set; }
-        public string Notes  { get; set; }
+        public string Notes { get; set; }
         public string Faction { get; set; }
 
-        public string GetIcon() => Name.Replace(" ", "-")
-   .ToLower() + ".png";
+        public string Icon { get; set; }
     }
 }

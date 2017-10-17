@@ -1,4 +1,4 @@
-﻿@model MVCI_Compendium.Models.Character[]
+﻿@model MVCI_Compendium.Models.CharacterListViewModel
 
 @{
     ViewData["Title"] = "Home Page";
@@ -13,7 +13,7 @@
             <button id="capcom-btn">Capcom</button>
             <button id="marvel-btn">Marvel</button>
         </div>
-            @foreach (var character in Model)
+            @foreach (var character in Model.Characters)
             {
                 @if (character.Faction == "capcom")
                 {
@@ -21,7 +21,7 @@
                         <div class="charTitle">
                             @character.Name
                         </div>
-                        <a href="@Url.Action("Detail", new { id = character.Id })">
+                        <a href="@Url.Action("Detail", new { name = character.Id })">
                             <div class="center-block">
                                 <img src="/images/@character.Icon"
                                      class="img-responsive img-thumbnail icon" />
@@ -36,7 +36,7 @@
                         <div class="charTitle">
                             @character.Name
                         </div>
-                        <a href="@Url.Action("Detail", new { id = character.Id })">
+                        <a href="@Url.Action("Detail", new { name = character.Id })">
                             <div class="center-block">
                                 <img src="/images/@character.Icon"
                                      class="img-responsive img-thumbnail icon" />
