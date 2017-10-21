@@ -35,7 +35,7 @@ namespace MVCI_Compendium.Controllers
                     Icon = c.GetIcon(),
                     Faction = c.Faction,
                     Name = c.Name,
-                    Id = c.Id
+                    CharacterId = c.CharacterId
 
                 }).ToList()
             };
@@ -54,12 +54,11 @@ namespace MVCI_Compendium.Controllers
             {
                 var CharacterViewModel = new CharacterViewModel
                 {
-                    Id = character.Id,
+                    CharacterId = character.CharacterId,
                     Name = character.Name,
                     Stamina = character.Stamina,
                     Bio = character.Bio,
-                    MoveList = character.MoveList,
-                    Videos = character.Videos,
+                    MoveList = character.Moves,
                     Combos = character.Combos,
                     Notes = character.Notes
                 };
@@ -81,10 +80,10 @@ namespace MVCI_Compendium.Controllers
             return RedirectToAction("Detail");
         }
 
-
-        public IActionResult Edit(string id)
+        [HttpPost("Characters/{name}/Combos")]
+        public IActionResult Add(string CharacterId)
         {
-            if (id == null)
+            if (CharacterId == null)
             {
                 return new NotFoundObjectResult(HttpStatusCode.BadRequest);
             }
@@ -93,9 +92,9 @@ namespace MVCI_Compendium.Controllers
         }
 
 
-        public IActionResult Delete(string id)
+        public IActionResult Delete(string CharacterId)
         {
-            if (id == null)
+            if (CharacterId == null)
             {
                 return new NotFoundObjectResult(HttpStatusCode.BadRequest);
             }

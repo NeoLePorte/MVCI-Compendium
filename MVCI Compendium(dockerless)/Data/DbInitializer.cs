@@ -1,19 +1,26 @@
-﻿using MVCI_Compendium.Models;
-using Google.Apis.YouTube.v3;
-using Google.Apis.YouTube.v3.Data;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using MVCI_Compendium.Models;
 
 namespace MVCI_Compendium.Data
 {
-    public class CharacterRepository
+    public class DbInitializer
     {
-        private static List<Character> _characters = new List<Character>
+        public static void Initialize(Context context)
+        {
+            context.Database.EnsureCreated();
 
-{
-    //Object initializer syntax
-     //---------------------------------------------------------------------------------------------------------------------------------
-                                                            //Capcom Characters
-     //---------------------------------------------------------------------------------------------------------------------------------
+            // Look for any characters.
+            if (context.Characters.Any())
+            {
+                return;   // DB has been seeded
+            }
+
+            var characters = new List<Character>
+            {
+
     new Character()
     {
         Order = 1,
@@ -23,7 +30,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>\"Striders\" is an intelligence organization with a long history. Among the Striders, Strider Hiryu is an elite intelligence operative and the youngest to attain the title of Special A-Class. Specialized in covert ops and assassination, he's a man who freely utilizes ninjutsu and high-tech weaponry. There seems to be rumors that his target, Grandmaster Meio, is working together with Ultron Sigma, and apparently Hiryu joined the resistance in order to investigate this.\"</p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs = 
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -31,7 +38,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -40,7 +47,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -48,7 +55,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -56,7 +63,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -67,103 +74,103 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "Hard Punch"},
                    new InputModel() {Input = "Hard Punch"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
@@ -184,7 +191,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -192,7 +199,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -201,7 +208,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -209,7 +216,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -217,7 +224,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -228,110 +235,110 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-  
+
         Notes = "",
         Faction = "capcom"
     },
@@ -344,7 +351,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -352,7 +359,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -361,7 +368,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -369,7 +376,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -377,7 +384,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -388,111 +395,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "capcom"
     },
@@ -505,7 +512,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -513,7 +520,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -522,7 +529,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -530,7 +537,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -538,7 +545,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -549,110 +556,110 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
+
         Notes = "",
         Faction = "capcom"
     },
@@ -665,7 +672,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -673,7 +680,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -682,7 +689,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -690,7 +697,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -698,7 +705,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -709,111 +716,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "capcom"
     },
@@ -826,7 +833,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -834,7 +841,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -843,7 +850,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -851,7 +858,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -859,7 +866,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -870,111 +877,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "capcom"
     },
@@ -987,7 +994,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>\"Striders\" is an intelligence organization with a long history. Among the Striders, Strider Hiryu is an elite intelligence operative and the youngest to attain the title of Special A-Class. Specialized in covert ops and assassination, he's a man who freely utilizes ninjutsu and high-tech weaponry. There seems to be rumors that his target, Grandmaster Meio, is working together with Ultron Sigma, and apparently Hiryu joined the resistance in order to investigate this.\"</p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -995,7 +1002,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1004,7 +1011,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1012,7 +1019,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1020,7 +1027,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1031,111 +1038,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-       
+
+
         Notes = "",
         Faction = "capcom"
     },
@@ -1148,7 +1155,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1156,7 +1163,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1165,7 +1172,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1173,7 +1180,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1181,7 +1188,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1192,111 +1199,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "capcom"
     },
@@ -1309,7 +1316,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1317,7 +1324,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1326,7 +1333,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1334,7 +1341,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1342,7 +1349,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1354,111 +1361,111 @@ namespace MVCI_Compendium.Data
         Notes = "",
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-       
+
+
         Faction = "capcom"
     },
     new Character()
@@ -1470,7 +1477,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1478,7 +1485,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1487,7 +1494,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1495,7 +1502,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1503,7 +1510,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1514,111 +1521,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "capcom"
     },
@@ -1631,7 +1638,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1639,7 +1646,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1648,7 +1655,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1656,7 +1663,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1664,7 +1671,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1675,111 +1682,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "capcom"
     },
@@ -1792,7 +1799,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1800,7 +1807,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1809,7 +1816,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1817,7 +1824,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1825,7 +1832,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1836,111 +1843,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "capcom"
 
@@ -1954,7 +1961,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1962,7 +1969,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1971,7 +1978,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1979,7 +1986,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1987,7 +1994,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -1998,111 +2005,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "capcom"
 
@@ -2116,7 +2123,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2124,7 +2131,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2133,7 +2140,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2141,7 +2148,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2149,7 +2156,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2160,111 +2167,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "capcom"
 
@@ -2278,7 +2285,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p><strong>Mayor OF EARTH!</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2286,7 +2293,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2295,7 +2302,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2303,7 +2310,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2311,7 +2318,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2322,118 +2329,114 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "capcom"
     },
-
-     //---------------------------------------------------------------------------------------------------------------------------------
-                                                            //Marvel characters
-     //---------------------------------------------------------------------------------------------------------------------------------
      new Character()
     {
         Order = 16,
@@ -2443,7 +2446,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>\"Striders\" is an intelligence organization with a long history. Among the Striders, Strider Hiryu is an elite intelligence operative and the youngest to attain the title of Special A-Class. Specialized in covert ops and assassination, he's a man who freely utilizes ninjutsu and high-tech weaponry. There seems to be rumors that his target, Grandmaster Meio, is working together with Ultron Sigma, and apparently Hiryu joined the resistance in order to investigate this.\"</p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2451,7 +2454,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2460,7 +2463,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2468,7 +2471,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2476,7 +2479,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2487,111 +2490,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "marvel"
     },
@@ -2604,7 +2607,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2612,7 +2615,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2621,7 +2624,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2629,7 +2632,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2637,7 +2640,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2648,111 +2651,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "marvel"
     },
@@ -2765,7 +2768,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2773,7 +2776,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2782,7 +2785,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2790,7 +2793,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2798,7 +2801,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2809,111 +2812,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "marvel"
     },
@@ -2926,7 +2929,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2934,7 +2937,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2943,7 +2946,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2951,7 +2954,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2959,7 +2962,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -2970,111 +2973,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "marvel"
     },
@@ -3087,7 +3090,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3095,7 +3098,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3104,7 +3107,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3112,7 +3115,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3120,7 +3123,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3131,111 +3134,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "marvel"
     },
@@ -3248,7 +3251,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3256,7 +3259,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3265,7 +3268,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3273,7 +3276,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3281,7 +3284,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3292,111 +3295,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "marvel"
     },
@@ -3409,7 +3412,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>\"Striders\" is an intelligence organization with a long history. Among the Striders, Strider Hiryu is an elite intelligence operative and the youngest to attain the title of Special A-Class. Specialized in covert ops and assassination, he's a man who freely utilizes ninjutsu and high-tech weaponry. There seems to be rumors that his target, Grandmaster Meio, is working together with Ultron Sigma, and apparently Hiryu joined the resistance in order to investigate this.\"</p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3417,7 +3420,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3426,7 +3429,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3434,7 +3437,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3442,7 +3445,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3453,111 +3456,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "marvel"
     },
@@ -3570,7 +3573,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3578,7 +3581,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3587,7 +3590,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3595,7 +3598,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3603,7 +3606,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3614,111 +3617,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "marvel"
     },
@@ -3731,7 +3734,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3739,7 +3742,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3748,7 +3751,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3756,7 +3759,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3764,7 +3767,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3775,111 +3778,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "marvel"
     },
@@ -3892,7 +3895,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3900,7 +3903,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3909,7 +3912,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3917,7 +3920,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3925,7 +3928,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -3936,111 +3939,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "marvel"
     },
@@ -4053,7 +4056,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4061,7 +4064,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4070,7 +4073,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4078,7 +4081,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4086,7 +4089,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4097,111 +4100,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "marvel"
     },
@@ -4214,7 +4217,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4222,7 +4225,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4231,7 +4234,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4239,7 +4242,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4247,7 +4250,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4258,111 +4261,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "marvel"
 
@@ -4376,7 +4379,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4384,7 +4387,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4393,7 +4396,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4401,7 +4404,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4409,7 +4412,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4420,111 +4423,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "marvel"
 
@@ -4538,7 +4541,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives...<strong>will Peter Parker?</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs =
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4546,7 +4549,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4555,7 +4558,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4563,7 +4566,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4571,7 +4574,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4582,111 +4585,111 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "marvel"
 
@@ -4700,7 +4703,7 @@ namespace MVCI_Compendium.Data
         Bio = "<p><strong>Mayor OF EARTH!</strong></p>",
         Combos = new List<Combo>
         {
-            new Combo() { ComboId = 1, Difficulty = "easy", Inputs = 
+            new Combo() {  Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4708,7 +4711,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
                 ,Type = "BnB" },
-            new Combo() { ComboId = 2, Difficulty = "easy", Inputs =
+            new Combo() { Difficulty = "easy", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4717,7 +4720,7 @@ namespace MVCI_Compendium.Data
             }
 
                 ,Type = "BnB" },
-            new Combo() { ComboId = 3, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4725,7 +4728,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "BnB" },
-            new Combo() { ComboId = 4, Difficulty = "medium", Inputs =
+            new Combo() { Difficulty = "medium", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4733,7 +4736,7 @@ namespace MVCI_Compendium.Data
                 new InputModel() {Input = "Ame-no-Murakumo" },
             }
             ,Type = "Flashy" },
-            new Combo() { ComboId = 5, Difficulty = "hard", Inputs =
+            new Combo() { Difficulty = "hard", Inputs =
                 new List<InputModel>
             {
                 new InputModel() {Input = "Light Punch" },
@@ -4744,135 +4747,125 @@ namespace MVCI_Compendium.Data
         },
         Moves = new List<MoveModel>
         {
-            new MoveModel() {MoveModelId = 1, Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
+            new MoveModel() {Type ="Special Moves", Name = "Ame-no-Murakumo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 2, Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Excalibur", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 3, Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation B", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 4, Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Formation C", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 5, Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Gram", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 6, Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
+            new MoveModel()  {Type="Special Moves", Name = "Vajra", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 7, Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
+            new MoveModel() { Type="Special Moves", Name = "Wall Cling", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 8, Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Brionac", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 9, Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Legion", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 10, Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
+            new MoveModel() {Type="Hyper Combo", Name = "Level 3 Hyper Combo", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 11, Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
+            new MoveModel() { Type="Hyper Combo", Name = "Ouroboros", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 12, Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() {Type="Target Combos", Name = "Aerial Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 13, Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Arch Cut", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 14, Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A1", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 15, Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Formation A2", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 16, Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Lateral Slice", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             },
-            new MoveModel() {MoveModelId = 17, Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
+            new MoveModel() { Type="Command Normals", Name = "Slide", Inputs = new List<InputModel>
                 {
                    new InputModel() {Input = "up"},
                    new InputModel() {Input = "up"}
                 }
             }
         },
-         
-        
+
+
         Notes = "",
         Faction = "marvel"
     }
 };
-        public List<Character> GetCharacter()
-        {
-            return _characters;
-        }
 
 
-        public Character GetCharacter(string CharacterId)
-        {
-            Character characterToReturn = null;
 
-            foreach (var character in _characters)
-            {
-                if (character.CharacterId == CharacterId)
+            foreach (Character c in characters)
                 {
-                    characterToReturn = character;
-
-                    break;
+                    context.Characters.Add(c);
                 }
-            }
-            return characterToReturn;
-        }
+                context.SaveChanges();
+
+                }
+ 
     }
 }

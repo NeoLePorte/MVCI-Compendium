@@ -32,6 +32,8 @@ namespace MVCI_Compendium
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<CharacterRepository, CharacterRepository>();
+            services.AddDbContext<Context>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc();
         }
@@ -53,6 +55,8 @@ namespace MVCI_Compendium
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
+
 
             app.UseMvc();
         }
