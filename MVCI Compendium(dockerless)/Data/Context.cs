@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MVCI_Compendium.Models;
-using MVCI_Compendium.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MVCI_Compendium.Data
 {
@@ -20,7 +15,14 @@ namespace MVCI_Compendium.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.Entity<MoveInput>(t =>
+            {
+                t.HasKey(x => new { x.MoveId, x.InputValue });
+            });
+            modelBuilder.Entity<ComboInput>(t =>
+            {
+                t.HasKey(x => new { x.ComboId, x.InputValue });
+            });
         }
 
 

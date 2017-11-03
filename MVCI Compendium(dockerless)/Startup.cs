@@ -7,6 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using MVCI_Compendium.Data;
 using MVCI_Compendium.Models;
 using MVCI_Compendium.Services;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace MVCI_Compendium
 {
@@ -51,6 +54,14 @@ namespace MVCI_Compendium
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseFileServer(new FileServerOptions()
+            {
+                        FileProvider = new PhysicalFileProvider(
+                        Path.Combine(Directory.GetCurrentDirectory(), @"node_modules")),
+                        RequestPath = new PathString("/node_modules"),
+                        EnableDirectoryBrowsing = true
+            });
 
             app.UseStaticFiles();
 

@@ -2,9 +2,7 @@
 @model MVCI_Compendium.Models.CharacterViewModel
 
 @{
-    ViewData["Title"] = "Detail";
-    var isEditMode = Model.CharacterId != null;
-    ViewBag.Title = isEditMode ? "Edit Note" : "Add Note";
+    ViewData["Title"] = Model.Name + " Detail";
 
 }
 <div  class ="character-background container"style="
@@ -32,7 +30,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">@Model.Name  Move List</h5>
+                                    <h5 class="modal-title" id="MoveList">@Model.Name  Move List</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -40,7 +38,7 @@
                                 <div class="modal-body">
                                     <div>
                                         <ul class="list-group">
-                                            @foreach (var move in Model.MoveList)
+                                            @foreach (var move in Model.Moves)
                                             {
                                                 <text>@move.Name</text>
                                                 <li class="list-group-item">
@@ -101,17 +99,32 @@
                                 </div>
                                 <div class="modal-body">
                                     <ul class="list-group">
-                                        @foreach (var combos in Model.Combos)
+                                        @foreach (var combo in Model.Combos)
                                         {
-                                            <text>@combos.Type | @combos.Difficulty</text>
-                                            <li class="list-group-item">@Html.Raw(combos.Inputs)</li>
+                                            <text>@combo.Type | @combo.Difficulty</text>
+                                            <li class="list-group-item comboList">
+                                                @foreach (var input in combo.Inputs)
+                                                {
+                                                    foreach (var move in Model.Moves)
+                                                    {
+                                                        if (input.Input == move.Name)
+                                                        {
+                                                            <p>@input.Input</p>
+
+                                                        }
+                                                    }
+                                                    <img src="~/images/@input.GetIcon()"
+                                                         class="icon"/> <span>,</span>
+
+                                                }
+                                                | <a asp-action="ComboEdit" asp-controller="Home" asp-route-ComboId =@combo.ComboId>Edit</a>
+                                            </li>
                                         }
                                     </ul>
-
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Add</button>
+                                    <a class="btn btn-primary" asp-action="ComboAdd" asp-controller="Home">Add</a>
                                 </div>
                             </div>
                         </div>
@@ -132,14 +145,14 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form asp-controller="Home" asp-action="Save" method="post">
+                                    <form asp-controller="Home" asp-action="SaveNotes" method="post">
                                         <div class="form-group">
                                             <textarea asp-for="Notes" class="form-control">@Model.Notes</textarea>
                                         </div>
 
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button asp-type="submit" class="btn btn-primary">@(isEditMode ? "Save" : "Add")</button>
+                                            <button asp-type="submit" class="btn btn-primary">Save</button>
                                         </div>
                                     </form>
                                 </div>

@@ -21,7 +21,7 @@
                         <div class="charTitle">
                             @character.Name
                         </div>
-                        <a href="@Url.Action("Detail", new { name = character.CharacterId })">
+                        <a asp-action="Detail" asp-controller="Home" asp-route-name=@character.Name>
                             <div class="center-block">
                                 <img src="/images/@character.Icon"
                                      class="img-responsive img-thumbnail icon" />
@@ -36,7 +36,7 @@
                         <div class="charTitle">
                             @character.Name
                         </div>
-                        <a href="@Url.Action("Detail", new { name = character.CharacterId })">
+                        <a asp-action="Detail" asp-controller="Home" asp-route-name=@character.Name>
                             <div class="center-block">
                                 <img src="/images/@character.Icon"
                                      class="img-responsive img-thumbnail icon" />

@@ -70,6 +70,15 @@ body {
     border: solid black 4px;
 }
 
+.comboList p {
+    font-weight: 600;
+    margin: 0;
+    margin-top: 2px;
+    padding: 0;
+    display: inline-block;
+    font-size: small;
+}
+
 .marvel-characters {
     display: none;
     background-color: rgba(255,0,0,0.6);
@@ -156,6 +165,6 @@ footer {
 
 
 .inputIcon {
-    width: 5rem;
+    width: 2.5rem;
     height: auto;
 }

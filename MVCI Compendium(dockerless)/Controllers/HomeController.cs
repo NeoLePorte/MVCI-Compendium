@@ -5,16 +5,19 @@ using MVCI_Compendium.Models;
 using MVCI_Compendium.Data;
 using System.Linq;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
 namespace MVCI_Compendium.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController(ILogger<HomeController> logger, CharacterRepository characterRepository)
+        public HomeController(ILogger<HomeController> logger, Context context)
         {
             _logger = logger;
-            _characterRepository = characterRepository;
+            _context = context;
         }
-        private CharacterRepository _characterRepository = null;
+        private Context _context = null;
         private readonly ILogger<HomeController> _logger;
         
         [HttpGet("")]
@@ -26,29 +29,39 @@ namespace MVCI_Compendium.Controllers
         [HttpGet("Characters")]
         public  IActionResult Index()
         {
-            var characters =  _characterRepository.GetCharacter();
-            var charList = new CharacterListViewModel
+            var characters =  _context.Characters
+                .OrderBy(c => c.Order)
+                .ToList();
+            if (characters != null)
             {
-
-                Characters = characters.Select(c => new CharacterViewModel
+                var charList = new CharacterListViewModel
                 {
-                    Icon = c.GetIcon(),
-                    Faction = c.Faction,
-                    Name = c.Name,
-                    CharacterId = c.CharacterId
 
-                }).ToList()
-            };
-            _logger.LogDebug("Loading a list of all characters");
-            return View(charList);
+                    Characters = characters.Select(c => new CharacterViewModel
+                    {
+                        Icon = c.GetIcon(),
+                        Faction = c.Faction,
+                        Name = c.Name,
+                        CharacterId = c.CharacterId,
+                    })
+                    .ToList()
+                };
+                _logger.LogDebug("Loading a list of all characters");
+                return View(charList);
+            }
+            return new NotFoundObjectResult(HttpStatusCode.BadRequest);
         }
 
 
         [HttpGet("Characters/{name}")]
         public IActionResult Detail(string name)
         {
-            var character = _characterRepository.GetCharacter((string)name);
-
+            var character = _context.Characters
+                .Include(c => c.Moves)
+                .ThenInclude(i => i.Inputs)
+                .Include(c => c.Combos)
+                .ThenInclude(i => i.Inputs)
+                .SingleOrDefault(c => c.Name == name);
 
             if (character != null)
             {
@@ -58,7 +71,7 @@ namespace MVCI_Compendium.Controllers
                     Name = character.Name,
                     Stamina = character.Stamina,
                     Bio = character.Bio,
-                    MoveList = character.Moves,
+                    Moves = character.Moves,
                     Combos = character.Combos,
                     Notes = character.Notes
                 };
@@ -70,25 +83,84 @@ namespace MVCI_Compendium.Controllers
         }
 
 
+
+
         [HttpPost("Characters/{name}/Notes")]
-        public IActionResult Save(string name, NotesViewModel notesViewModel)
+        public IActionResult SaveNotes(CharacterViewModel characterViewModel)
         {
-            var character = _characterRepository.GetCharacter((string)name);
+            
+            var characterToUpdate = _context.Characters
+                .SingleOrDefault(c => c.Name == characterViewModel.Name);
 
-            character.Notes = notesViewModel.Notes;
-
-            return RedirectToAction("Detail");
+            if (characterViewModel.Name != null)
+            {
+                try
+                {
+                    characterToUpdate.Notes = characterViewModel.Notes;
+                    _context.SaveChanges();
+                    return RedirectToAction("Detail");
+                }
+                catch (DbUpdateException ex)
+                {
+                    //Log the error (uncomment ex variable name and write a log.)
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                        "Try again, and if the problem persists, " +
+                        "see your system administrator.");
+                    return RedirectToAction("Detail", ex);
+                }
+            }
+            return View(characterToUpdate);
         }
 
-        [HttpPost("Characters/{name}/Combos")]
-        public IActionResult Add(string CharacterId)
+        [HttpGet("Characters/{name}/AddCombo")]
+        public IActionResult ComboAdd()
         {
-            if (CharacterId == null)
+
+            var ComboView = new ComboView();
+
+                return View("AddEditCombo", ComboView);
+        }
+
+        [HttpPost("Characters/{name}/AddCombo")]
+        public IActionResult AddCombo(string CharacterId, ComboView combo)
+        {
+            if (combo == null)
             {
                 return new NotFoundObjectResult(HttpStatusCode.BadRequest);
             }
+            var character = _context.Characters
+                .Include(c => c.Moves)
+                .ThenInclude(i => i.Inputs)
+                .Include(c => c.Combos)
+                .ThenInclude(i => i.Inputs)
+                .SingleOrDefault(c => c.CharacterId == CharacterId);
+            var newCombo = new Combo()
+            {
+                Inputs = combo.Inputs,
+                Type = combo.Type,
+                Difficulty = combo.Difficulty
+            };
+            character.Combos.Add(newCombo);
+            return RedirectToAction("Detail");
+        }
 
-            return View();
+
+        /*---------Edit Combo--------------*/
+        [HttpGet("Characters/{name}/EditCombo")]
+        public IActionResult ComboEdit(int ComboId)
+        {
+            var combo = _context.Combos
+                .Include(i => i.Inputs)
+                .SingleOrDefault(c => c.ComboId == ComboId);
+            var ComboView = new ComboView()
+            {
+                ComboId = combo.ComboId,
+                Difficulty = combo.Difficulty,
+                Type = combo.Type,
+                Inputs = combo.Inputs
+            };
+
+            return View("AddEditCombo", ComboView);
         }
 
 

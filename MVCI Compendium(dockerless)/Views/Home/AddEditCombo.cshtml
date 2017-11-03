@@ -1,0 +1,17 @@
+﻿@model MVCI_Compendium.Models.ComboView
+@{
+    var isEditMode = Model.ComboId != null;
+    ViewBag.Title = isEditMode ? "Edit Combo" : "Add Combo";
+}
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-sm-6 col-xs-10">
+        @using (Html.BeginForm(isEditMode ? "EditCombo" : "AddCombo", "Home"))
+        {
+            @Html.HiddenFor(m => m.ComboId)
+            
+            <button type="submit" class="btn btn-primary">@(isEditMode ? "Save" : "Add")</button>
+            @Html.ActionLink("Cancel", "Detail", null, new { @class = "btn btn-default" })
+        }
+    </div>
+</div>

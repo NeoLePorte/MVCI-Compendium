@@ -8,7 +8,10 @@ namespace MVCI_Compendium.Models
         public string Input { get; set; }
 
         public string GetIcon() => Input.Replace(" ", "-")
-   .ToLower() + ".svg";
+   .ToLower() + ".png";
+
+        public ICollection<ComboInput> ComboInputs { get; set; }
+        public ICollection<MoveInput> MoveInputs { get; set; }
     }
 
     

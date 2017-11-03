@@ -10,6 +10,14 @@
     "type": "git",
     "url": "git+https://github.com/NeoLePorte/MVCI-Compendium.git"
   },
+  "publishOptions": {
+    "include": [
+      "web.config",
+      "wwwroot",
+      "Views",
+      "node_modules"
+    ]
+  },
   "author": "Anthony Blanton",
   "license": "MIT",
   "bugs": {
