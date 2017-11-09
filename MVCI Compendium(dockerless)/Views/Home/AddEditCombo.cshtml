@@ -1,17 +1,29 @@
 ﻿@model MVCI_Compendium.Models.ComboView
 @{
     var isEditMode = Model.ComboId != null;
-    ViewBag.Title = isEditMode ? "Edit Combo" : "Add Combo";
+    ViewBag.Title = isEditMode ? "Edit Combo" : "Add New Combo";
 }
 <h2>@ViewBag.Title</h2>
 <div class="row">
     <div class="col-sm-6 col-xs-10">
-        @using (Html.BeginForm(isEditMode ? "EditCombo" : "AddCombo", "Home"))
-        {
-            @Html.HiddenFor(m => m.ComboId)
-            
+        
+            @if (isEditMode)
+            {
+              <form asp-controller="Home" asp-action="EditCombo" method="post">
+
+                  @foreach (var input in Model.Inputs)
+                  {
+                  <select asp-for="Inputs"
+                          asp-items="">
+                  </select>
+                  }
+              </form>
+                
+
+            }
+
+
             <button type="submit" class="btn btn-primary">@(isEditMode ? "Save" : "Add")</button>
             @Html.ActionLink("Cancel", "Detail", null, new { @class = "btn btn-default" })
-        }
     </div>
 </div>

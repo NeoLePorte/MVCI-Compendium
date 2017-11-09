@@ -84,7 +84,7 @@ namespace MVCI_Compendium.Controllers
 
 
 
-
+        /*--------------------Save Notes-------------------------------*/
         [HttpPost("Characters/{name}/Notes")]
         public IActionResult SaveNotes(CharacterViewModel characterViewModel)
         {
@@ -121,6 +121,7 @@ namespace MVCI_Compendium.Controllers
                 return View("AddEditCombo", ComboView);
         }
 
+        /*---------Add Combo--------------*/
         [HttpPost("Characters/{name}/AddCombo")]
         public IActionResult AddCombo(string CharacterId, ComboView combo)
         {
@@ -134,6 +135,7 @@ namespace MVCI_Compendium.Controllers
                 .Include(c => c.Combos)
                 .ThenInclude(i => i.Inputs)
                 .SingleOrDefault(c => c.CharacterId == CharacterId);
+
             var newCombo = new Combo()
             {
                 Inputs = combo.Inputs,
@@ -152,6 +154,7 @@ namespace MVCI_Compendium.Controllers
             var combo = _context.Combos
                 .Include(i => i.Inputs)
                 .SingleOrDefault(c => c.ComboId == ComboId);
+
             var ComboView = new ComboView()
             {
                 ComboId = combo.ComboId,
@@ -163,12 +166,20 @@ namespace MVCI_Compendium.Controllers
             return View("AddEditCombo", ComboView);
         }
 
-
-        public IActionResult Delete(string CharacterId)
+        /*---------Delete Combo--------------*/
+        [HttpPost("Characters/{name}/DeleteCombo")]
+        public IActionResult Delete(int ComboId)
         {
-            if (CharacterId == null)
+            var combo = _context.Combos
+                .Include(i => i.Inputs) 
+                .SingleOrDefault(c => c.ComboId == ComboId);
+
+            if (combo != null)  
             {
-                return new NotFoundObjectResult(HttpStatusCode.BadRequest);
+                _context.Combos.Remove(combo);
+                _context.SaveChanges();
+
+                return RedirectToAction("Detail");
             }
 
             return View();
