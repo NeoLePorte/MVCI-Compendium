@@ -14,7 +14,7 @@
                   @foreach (var input in Model.Inputs)
                   {
                   <select asp-for="Inputs"
-                          asp-items="">
+                          asp-items="@Model.SelectInputs">
                   </select>
                   }
               </form>
