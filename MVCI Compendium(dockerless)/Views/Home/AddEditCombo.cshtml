@@ -9,21 +9,40 @@
         
             @if (isEditMode)
             {
-              <form asp-controller="Home" asp-action="EditCombo" method="post">
+              <form asp-controller="Home" asp-action="EditCombo" method="post" asp-route-ComboId =@Model.ComboId class="form-horizontal">
 
-                  @foreach (var input in Model.Inputs)
-                  {
-                  <select asp-for="Inputs"
+				  
+				
+					  <label asp-for="Inputs" class="control-label"/>
+				  @foreach (var input in Model.Inputs)
+				  {
+                 <select class= "form-control" asp-for="@input.Input" name="@input.InputModelId"
                           asp-items="@Model.SelectInputs">
+				 	<option disabled>@input.Input</option>
                   </select>
-                  }
+				  }
+			  	<select class="form-control" asp-for="Type">
+			  		<option disabled>Please select one</option>
+			  		<option>BnB</option>
+			  		<option>Flashy</option>
+			  		<option>Blarg</option>
+			  	</select>
+
+			  	<select class="form-control" asp-for="Difficulty">
+			  		<option disabled>Please select one</option>
+				<option >Easy</option>
+				<option >Medium</option>
+				<option >Hard</option>
+			  	</select>
+				  
+			  	<button type="submit" class="btn btn-primary">"Save"</button>
               </form>
                 
 
             }
 
 
-            <button type="submit" class="btn btn-primary">@(isEditMode ? "Save" : "Add")</button>
+            
             @Html.ActionLink("Cancel", "Detail", null, new { @class = "btn btn-default" })
     </div>
 </div>

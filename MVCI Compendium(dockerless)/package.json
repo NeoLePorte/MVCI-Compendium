@@ -1,27 +1,31 @@
 {
-  "name": "mvci_compendium",
-  "version": "0.0.1",
-  "description": "Marvel vs Capcom Infinite resource in Web App form",
-  "main": "site.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NeoLePorte/MVCI-Compendium.git"
-  },
-  "publishOptions": {
-    "include": [
-      "web.config",
-      "wwwroot",
-      "Views",
-      "node_modules"
-    ]
-  },
-  "author": "Anthony Blanton",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/NeoLePorte/MVCI-Compendium/issues"
-  },
-  "homepage": "https://github.com/NeoLePorte/MVCI-Compendium#readme"
+	"name": "mvci_compendium",
+	"version": "0.0.1",
+	"description": "Marvel vs Capcom Infinite resource in Web App form",
+	"main": "site.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/NeoLePorte/MVCI-Compendium.git"
+	},
+	"publishOptions": {
+		"include": [
+			"web.config",
+			"wwwroot",
+			"Views"
+		]
+	},
+	"author": "Anthony Blanton",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/NeoLePorte/MVCI-Compendium/issues"
+	},
+	"homepage": "https://github.com/NeoLePorte/MVCI-Compendium#readme",
+	"dependencies": {
+		"bootstrap": "^4.0.0-alpha.6",
+		"bootstrap-select": "^1.12.4",
+		"webpack": "^3.8.1"
+	}
 }

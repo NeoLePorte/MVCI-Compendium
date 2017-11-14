@@ -84,8 +84,9 @@ namespace MVCI_Compendium.Controllers
 
 
 
-        /*--------------------Save Notes-------------------------------*/
-        [HttpPost("Characters/{name}/Notes")]
+		/*--------------------Save Notes-------------------------------*/
+		[ValidateAntiForgeryToken]
+		[HttpPost("Characters/{name}/Notes")]
         public IActionResult SaveNotes(CharacterViewModel characterViewModel)
         {
             
@@ -109,10 +110,11 @@ namespace MVCI_Compendium.Controllers
                     return RedirectToAction("Detail", ex);
                 }
             }
-            return View(characterToUpdate);
+            return View("Detail");
         }
 
-        [HttpGet("Characters/{name}/AddCombo")]
+		/*---------Add Combo--------------*/
+		[HttpGet("Characters/{name}/ComboAdd")]
         public IActionResult ComboAdd()
         {
 
@@ -121,8 +123,8 @@ namespace MVCI_Compendium.Controllers
                 return View("AddEditCombo", ComboView);
         }
 
-        /*---------Add Combo--------------*/
-        [HttpPost("Characters/{name}/AddCombo")]
+		[ValidateAntiForgeryToken]
+		[HttpPost("Characters/{name}/AddCombo")]
         public IActionResult AddCombo(string CharacterId, ComboView combo)
         {
             if (combo == null)
@@ -151,7 +153,8 @@ namespace MVCI_Compendium.Controllers
         [HttpGet("Characters/{name}/EditCombo")]
         public IActionResult ComboEdit(int ComboId)
         {
-            var combo = _context.Combos
+
+			var combo = _context.Combos
                 .Include(i => i.Inputs)
                 .SingleOrDefault(c => c.ComboId == ComboId);
 
@@ -165,9 +168,38 @@ namespace MVCI_Compendium.Controllers
 
             return View("AddEditCombo", ComboView);
         }
+		[ValidateAntiForgeryToken]
+		[HttpPost("Characters/{name}/Edit")]
+		public IActionResult EditCombo(int ComboId, ComboView InputEdit)
+		{
+			 var comboToEdit = _context.Combos
+				.Include(i => i.Inputs)
+				.SingleOrDefault(c => c.ComboId == ComboId);
 
-        /*---------Delete Combo--------------*/
-        [HttpPost("Characters/{name}/DeleteCombo")]
+			if (comboToEdit.Type != null)
+			{
+				try
+				{
+					comboToEdit.Difficulty = InputEdit.Difficulty;
+					comboToEdit.Type = InputEdit.Type;
+					comboToEdit.Inputs = InputEdit.Inputs;
+					_context.SaveChanges();
+
+					return RedirectToAction("Detail");
+				}
+				catch (DbUpdateException ex)
+				{
+					//Log the error (uncomment ex variable name and write a log.)
+					ModelState.AddModelError("", "Unable to save changes. " +
+						"Try again, and if the problem persists, " +
+						"see your system administrator.");
+					return RedirectToAction("Detail", ex);
+				}
+			}
+			return View("Detail");
+		}
+		/*---------Delete Combo--------------*/
+		[HttpPost("Characters/{name}/DeleteCombo")]
         public IActionResult Delete(int ComboId)
         {
             var combo = _context.Combos
